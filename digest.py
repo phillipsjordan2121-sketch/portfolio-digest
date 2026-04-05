@@ -51,7 +51,7 @@ def run_research():
         h_parts.append("- " + h["ticker"] + " (" + h["company"] + ", " + str(h["shares"]) + " shares, cost $" + str(h["cost"]) + ")")
     h_str = "\n".join(h_parts)
     print("Waiting 65 seconds to avoid rate limit...")
-    time.sleep(65)
+    time.sleep(90)
     research_prompt = "Senior equity analyst. Today: " + today + ".\nPRICES: " + price_ctx + "\nPORTFOLIO:\n" + h_str + "\n\nFor each holding write a 3-4 sentence research paragraph. Also provide exactly ONE best investment idea with ticker, company, and paragraph. Return ONLY JSON: {\"summary\":{\"outlook\":\"...\"},\"macro\":{\"fed_rate\":\"...\",\"ten_year\":\"...\",\"vix\":\"...\",\"cpi\":\"...\"},\"portfolio\":[{\"ticker\":\"NVDA\",\"sentiment\":\"bullish\",\"current_price\":177.39,\"company\":\"NVIDIA\",\"paragraph\":\"...\"}],\"idea\":{\"ticker\":\"...\",\"company\":\"...\",\"conviction\":\"High\",\"paragraph\":\"...\"}}"
     research_res = client.messages.create(
         model="claude-sonnet-4-20250514", max_tokens=4000,
