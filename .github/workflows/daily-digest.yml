@@ -4,6 +4,10 @@ on:
     - cron: '0 20 * * 1-5'
   workflow_dispatch:
 
+concurrency:
+  group: daily-digest
+  cancel-in-progress: true
+
 jobs:
   digest:
     runs-on: ubuntu-latest
